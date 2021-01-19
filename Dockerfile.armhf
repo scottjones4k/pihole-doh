@@ -1,5 +1,6 @@
 FROM pihole/pihole:master-buster
-	
+COPY qemu-arm-static /usr/bin/
+
 COPY ./install.sh /
 COPY ./config.yaml /tmp
 
