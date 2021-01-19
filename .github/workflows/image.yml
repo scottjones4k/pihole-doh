@@ -20,5 +20,5 @@ jobs:
       - name: build the image
         run: |
           docker buildx build \
-            --tag scottjones4k/pihole-doh:latest:latest \
+            --tag scottjones4k/pihole-doh:latest \
             --platform linux/amd64,linux/arm/v7,linux/arm64 .
