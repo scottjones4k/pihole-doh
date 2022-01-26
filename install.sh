@@ -3,7 +3,7 @@
 # install basic packages
 apt-get -y update \
     && apt-get -y dist-upgrade \
-    && apt-get -y install bash
+    && apt-get -y install bash wget
 
 # install cloudflared
 cd /tmp \
