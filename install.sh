@@ -6,14 +6,10 @@ apt-get -y update \
     && apt-get -y install bash
 
 # install cloudflared
-
 cd /tmp \
-    && wget https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.tgz \
-    && tar -xvzf ./cloudflared-stable-linux-arm.tgz \
-    && cp ./cloudflared /usr/local/bin \
-    && rm -f ./cloudflared-stable-linux-arm.tgz
-useradd -s /usr/sbin/nologin -r -M cloudflared \
-    && chown cloudflared:cloudflared /usr/local/bin/cloudflared
+    && wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb \
+    && apt-get install ./cloudflared-linux-amd64.deb \
+    && rm -f .//cloudflared-linux-amd64.deb
     
 # clean cloudflared config
 mkdir -p /etc/cloudflared \
@@ -26,13 +22,8 @@ cd /tmp \
     && rm -f ./config.yaml
 
 # run cloudflared as service
-mkdir -p /etc/services.d/cloudflared \
-    && echo '#!/usr/bin/with-contenv bash' > /etc/services.d/cloudflared/run \
-    && echo 's6-echo "Starting cloudflared"' >> /etc/services.d/cloudflared/run \
-    && echo '/usr/local/bin/cloudflared --config /etc/cloudflared/config.yaml' >> /etc/services.d/cloudflared/run \
-    && echo '#!/usr/bin/with-contenv bash' > /etc/services.d/cloudflared/finish \
-    && echo 's6-echo "Stopping cloudflared"' >> /etc/services.d/cloudflared/finish \
-    && echo 'killall -9 cloudflared' >> /etc/services.d/cloudflared/finish
+cloudflared service install --legacy
+systemctl start cloudflared
 	
 # clean up
 apt-get -y autoremove \
