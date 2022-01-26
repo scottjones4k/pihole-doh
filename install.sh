@@ -23,7 +23,7 @@ cd /tmp \
 
 # run cloudflared as service
 cloudflared service install --legacy
-systemctl start cloudflared
+service cloudflared start
 	
 # clean up
 apt-get -y autoremove \
