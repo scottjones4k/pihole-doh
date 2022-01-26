@@ -1,4 +1,4 @@
-FROM pihole/pihole:master-buster
+FROM pihole/pihole:latest
 	
 COPY ./install.sh /
 COPY ./config.yaml /tmp
