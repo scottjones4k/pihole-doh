@@ -18,8 +18,8 @@ mkdir -p /etc/cloudflared \
 # add cloudflared config
 cd /tmp \
     && mkdir -p /etc/cloudflared \
-    && cp -n ./config.yaml /etc/cloudflared/ \
-    && rm -f ./config.yaml
+    && cp -n ./config.yml /etc/cloudflared/ \
+    && rm -f ./config.yml
 
 # run cloudflared as service
 cloudflared service install --legacy
